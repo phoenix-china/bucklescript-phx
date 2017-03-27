@@ -2,9 +2,15 @@
 BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client
 
 To install
-
 ```bash
 npm install -save bucklescript-phx
+```
+
+Please update your `bsconfig.json` to make `bsb` aware of this dependency
+```
+"bs-dependencies": [
+    "bucklescript-tea"
+  ]
 ```
 
 Please add this to you `assets/js/app.js`

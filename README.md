@@ -18,7 +18,7 @@ npm install -save bucklescript-phx
 Please update your `bsconfig.json` to make `bsb` aware of this dependency
 ```
 "bs-dependencies": [
-    "bucklescript-tea"
+    "bucklescript-phx"
   ]
 ```
 

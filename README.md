@@ -1,5 +1,13 @@
 # BuckleScript Phoenix
-BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client
+BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client.
+This is still a work in progress for now.
+Feel free to create PRs.
+
+- [X] Connect socket
+- [X] Join channel
+- [] Push
+- [] support both functional style and OO style API (where OCaml/BuckleScript shines)
+- [] support [https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea) (The Elm Architecture on BuckleScript)
 
 To install
 ```bash

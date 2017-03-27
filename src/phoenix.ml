@@ -5,8 +5,8 @@ module Push = Phx_push
 module Presence = Phx_presence
 open Abstract
 (*Constructor functions*)
+external initSocket : ?opts:Js.Json.t -> string -> Socket.t = "Socket" [@@bs.new]
 external initChannel : ?params:Js.Json.t -> ?socket:Socket.t -> Channel.t -> string -> Socket.t = "Channel" [@@bs.send]
-external initSocket : ?opts:Js.Json.t -> Socket.t -> string -> Socket.t = "Socket" [@@bs.new]
 external initPush : Push.t -> Channel.t -> string -> string -> float -> Push.t = "Push" [@@bs.new]
 (*Channel functions*)
 external joinChannel : ?timeout:float -> Channel.t -> Push.t = "join" [@@bs.send]

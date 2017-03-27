@@ -1,0 +1,17 @@
+{
+    "name": "bucklescript-phx",
+    "version": "0.0.1",
+    "bsc-flags": [
+        "-bs-cross-module-opt"
+    ],
+    "package-specs": [
+        "commonjs"
+    ],
+    "sources": [
+        "src",
+        {
+            "dir": "test",
+            "type": "dev"
+        }
+    ]
+}

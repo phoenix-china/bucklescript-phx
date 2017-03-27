@@ -9,7 +9,7 @@ npm install -save bucklescript-phx
 
 Please add this to you `assets/js/app.js`
 ```javascript
-import {Socket, Channel, Push, Presence} from "phoenix"
+import {Socket, Channel, Presence} from "phoenix"
 global.Socket = Socket
 global.Channel = Channel
 global.Presence = Presence

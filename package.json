@@ -3,11 +3,25 @@
   "description": "BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client",
   "author": "JackalCooper",
   "version": "0.0.1",
-  "repository": "",
   "scripts": {
     "start": "brunch watch --server",
     "build": "brunch build --production"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phoenix-china/bucklescript-phx.git"
+  },
+  "keywords": [
+    "TEA",
+    "Bucklescript",
+    "OCaml",
+    "Phoenix"
+  ],
+  "license": "LGPLv3",
+  "bugs": {
+    "url": "https://github.com/phoenix-china/bucklescript-phx/issues"
+  },
+  "homepage": "https://github.com/phoenix-china/bucklescript-phx#readme",
   "dependencies": {},
   "peerDependencies": {
     "bs-platform": "^1.5.2",

@@ -13,4 +13,13 @@ import {Socket, Channel, Presence} from "phoenix"
 global.Socket = Socket
 global.Channel = Channel
 global.Presence = Presence
-````
+```
+
+To join a channel:
+```ocaml
+open Phoenix
+let channel = let socket = initSocket "/socket" () in
+    let _socket = connectSocket socket () in
+    initChannel ~socket:socket "user:lobby" ()
+let channelJoined = joinChannel channel ()
+```

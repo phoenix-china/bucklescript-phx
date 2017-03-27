@@ -6,6 +6,7 @@ Feel free to create PRs.
 - [X] Connect socket
 - [X] Join channel
 - [ ] Push
+- [ ] Presence
 - [ ] Support both functional style and OO style API (where OCaml/BuckleScript shines)
 - [ ] Support [https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea) (The Elm Architecture on BuckleScript)
 

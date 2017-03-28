@@ -7,7 +7,8 @@ Feel free to create PRs.
 
 - [X] Connect socket
 - [X] Join channel
-- [ ] Push
+- [X] Push event
+- [X] Handle event
 - [ ] Presence
 - [ ] Support both functional style and OO style API (where OCaml/BuckleScript shines)
 - [ ] Support [https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea) (The Elm Architecture on BuckleScript)
@@ -39,16 +40,23 @@ open Phoenix
 let handleReiceive event any =
   match event with
   | "ok" -> let _ = Js.log any in Js.log "Joined"
-  | _ -> Js.log "Failed to join channel"
+  | "error" -> Js.log "Failed to join channel"
+  | otherEvent -> let _ = Js.log otherEvent in Js.log any
 
-let channel =
-  initSocket "/socket"
-  |> connectSocket
-  |> putOnClose (fun () -> Js.log "Socket closed")
-  |> initChannel "user:lobby"
-  |> joinChannel
-  |> putReceive "ok" (handleReiceive "ok")
-  |> putReceive "error" (handleReiceive "error")
+let handleEvent event ?response:any = let _ = Js.log any in ()
+
+let _ =
+  let socket = initSocket "/socket"
+               |> connectSocket
+               |> putOnClose (fun () -> Js.log "Socket closed") in
+  let channel = socket
+                |> initChannel "user:lobby" in
+  let _ = channel
+          |> putOn "from:server" (handleEvent "from:server")
+          |> joinChannel
+          |> putReceive "ok" (handleReiceive "ok")
+          |> putReceive "error" (handleReiceive "error") in
+  push "new:message" [%bs.obj { user = "It's a user"} ] channel
 
 let _ = Js.log {js|Phoenix Channel testing|js}
 ```

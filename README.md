@@ -33,15 +33,18 @@ global.Presence = Presence
 To join a channel:
 ```ocaml
 open Phoenix
-let channel = let socket = initSocket "/socket" () in
-    let _ = connectSocket socket () in
-    initChannel socket "user:lobby" ()
-let channelJoinedPush = joinChannel channel ()
+
 let handleReiceive event any =
     match event with
-    | "ok" -> Js.log any
+    | "ok" -> let _ = Js.log any in Js.log "Joined"
     | _ -> Js.log "Failed to join channel"
-let _ = channelJoinedPush##receive "ok"  (handleReiceive "ok")
-let _ = channelJoinedPush##receive "error"  (handleReiceive "error")
+let channel =
+    let socket =
+        initSocket "/socket" () |> startSocket |> putOnClose (fun () -> Js.log "Socket closed")
+    in
+    initChannel socket "user:lobby" ()
+let _ = joinChannel channel ()
+    |> putReceive "ok" (handleReiceive "ok")
+    |> putReceive "error" (handleReiceive "error")
 let _ = Js.log {js|Phoenix Channel testing|js}
 ```

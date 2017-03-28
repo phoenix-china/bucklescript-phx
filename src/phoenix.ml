@@ -10,9 +10,14 @@ external initChannel : Socket.t -> string -> ?chanParams:Js.Json.t -> unit -> Ch
 (*Channel functions*)
 external joinChannel : Channel.t -> ?timeout:float -> unit -> Push.t = "join" [@@bs.send]
 external leaveChannel : Channel.t -> ?timeout:float -> unit -> Push.t = "leave" [@@bs.send]
-external push : ?timeout:float -> Channel.t -> string -> Js.Json.t -> Push.t = "push" [@@bs.send]
+external push : Channel.t -> string -> object_ -> ?timeout:float -> unit -> Push.t = "push" [@@bs.send]
+let putOn event (f:(?response:any -> void)) channel = let _ = channel##on event f in channel
 (*Socket functions*)
-external disconnectSocket : ?callback:function_ -> ?code:string -> ?reason:any -> Socket.t -> void = "disconnect" [@@bs.send]
+external disconnectSocket : Socket.t -> ?callback:function_ -> ?code:string -> ?reason:any -> unit -> void = "disconnect" [@@bs.send]
 external connectSocket : Socket.t -> ?params:any -> unit -> void = "connect" [@@bs.send]
 external removeChannel : Socket.t -> Channel.t -> void = "remove" [@@bs.send]
-external createChannel : ?chanParams:Js.Json.t -> Socket.t -> string -> Channel.t = "channel" [@@bs.send]
+external createChannel : Socket.t -> string -> ?chanParams:Js.Json.t -> unit -> Channel.t = "channel" [@@bs.send]
+let startSocket socket = let _ = connectSocket socket () in socket
+let putOnClose (f:function_) socket = let _ = socket##onClose f in socket
+(*Push Functions*)
+let putReceive event handleReiceive push= let _ = push##receive event handleReiceive in push

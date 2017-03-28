@@ -34,7 +34,14 @@ To join a channel:
 ```ocaml
 open Phoenix
 let channel = let socket = initSocket "/socket" () in
-    let _socket = connectSocket socket () in
-    initChannel ~socket:socket "user:lobby" ()
-let channelJoined = joinChannel channel ()
+    let _ = connectSocket socket () in
+    initChannel socket "user:lobby" ()
+let channelJoinedPush = joinChannel channel ()
+let handleReiceive event any =
+    match event with
+    | "ok" -> Js.log any
+    | _ -> Js.log "Failed to join channel"
+let _ = channelJoinedPush##receive "ok"  (handleReiceive "ok")
+let _ = channelJoinedPush##receive "error"  (handleReiceive "error")
+let _ = Js.log {js|Phoenix Channel testing|js}
 ```

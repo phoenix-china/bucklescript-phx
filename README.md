@@ -35,16 +35,18 @@ To join a channel:
 open Phoenix
 
 let handleReiceive event any =
-    match event with
-    | "ok" -> let _ = Js.log any in Js.log "Joined"
-    | _ -> Js.log "Failed to join channel"
+  match event with
+  | "ok" -> let _ = Js.log any in Js.log "Joined"
+  | _ -> Js.log "Failed to join channel"
+
 let channel =
-    let socket =
-        initSocket "/socket" () |> startSocket |> putOnClose (fun () -> Js.log "Socket closed")
-    in
-    initChannel socket "user:lobby" ()
-let _ = joinChannel channel ()
-    |> putReceive "ok" (handleReiceive "ok")
-    |> putReceive "error" (handleReiceive "error")
+  initSocket "/socket"
+  |> connectSocket
+  |> putOnClose (fun () -> Js.log "Socket closed")
+  |> initChannel "user:lobby"
+  |> joinChannel
+  |> putReceive "ok" (handleReiceive "ok")
+  |> putReceive "error" (handleReiceive "error")
+
 let _ = Js.log {js|Phoenix Channel testing|js}
 ```

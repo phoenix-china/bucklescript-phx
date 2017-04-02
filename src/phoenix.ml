@@ -42,3 +42,8 @@ let putOnClose (f:function_) socket = let _ = socket##onClose f in socket
 
 let putReceive event handleReiceive push= let _ = push##receive event handleReiceive in push
 
+(*Presence Functions*)
+external putOnSyncState : Channel.t -> string -> (Presence.state -> void) -> unit -> void = "on" [@@bs.send]
+let putOnSyncState f channel = let _ = putOnSyncState channel "presence_state" f () in channel
+external putOnsyncDiff : Channel.t -> string -> (Presence.diff -> void) -> unit -> void = "on" [@@bs.send]
+let putOnsyncDiff f channel = let _ = putOnsyncDiff channel "presence_diff" f () in channel

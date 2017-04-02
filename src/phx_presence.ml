@@ -7,7 +7,7 @@ type meta = <
 
 type state = < metas : meta array > Js.Dict.t
 type diff = < joins : state; leaves : state > Js.t
-type joinsAndleaves = < joins : string; leaves : string > Js.t
+
 type onJoinOrLeave = (?key:string -> ?currentPresence:state -> ?newPresence:state -> void)
 external syncState : state -> state -> ?onJoin:onJoinOrLeave -> ?onLeave:onJoinOrLeave -> unit -> state = "Presence.syncState" [@@bs.val]
 let syncState ?onJoin:(onJoinOrLeave: onJoinOrLeave option) ?onLeave:(onJoinOrLeave: onJoinOrLeave option) currentState newState = syncState currentState newState ()

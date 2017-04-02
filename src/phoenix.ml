@@ -23,7 +23,7 @@ let leaveChannel ?timeout:(timeout: float option) channel = leaveChannel channel
 external push : Channel.t -> string -> payloadObject -> ?timeout:float -> unit -> Push.t = "push" [@@bs.send]
 let push event object_ ?timeout:(timeout: float option) channel = push channel event object_ ()
 
-let putOn event (f:(?response:any -> void)) channel = let _ = channel##on event f in channel
+let putOn event (f:(any -> void)) channel = let _ = channel##on event f in channel
 
 (*Socket functions*)
 

@@ -42,7 +42,7 @@ let handleReiceive event any =
   | "error" -> Js.log "Failed to join channel"
   | otherEvent -> let _ = Js.log otherEvent in Js.log any
 
-let handleEvent event ?response:response =
+let handleEvent event response =
   let _ = Js.log response in
   ()
 

@@ -1,16 +1,14 @@
 # BuckleScript Phoenix
 #### BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client.
 #### This is still a work in progress for now.
-
-The basic ideas about underneath binding are: if it doesn't have label argument(usually optional), declare it in module type. Otherwise declare it with `bs.send` or `bs.new`. At the end of the day, both of them will be wrapped with function support pipeing which receive `Socket`, `Channel` or `Push` as the last argument. (Not the first argument because currying direction of OCaml is the oppoiste of Elixir's)
-Feel free to create PRs.
+#### Feel free to create PRs.
 
 - [X] Connect socket
 - [X] Join channel
 - [X] Push event
 - [X] Handle event
 - [X] Presence
-- [ ] Support [https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea) (The Elm Architecture on BuckleScript)
+- [ ] Support The Elm Architecture on BuckleScript ([https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea))
 
 To install
 ```bash

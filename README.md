@@ -9,26 +9,28 @@
 - [X] Handle event
 - [X] Presence
 - [ ] Support The Elm Architecture on BuckleScript ([https://github.com/OvermindDL1/bucklescript-tea](BuckleScript-tea))
+- [ ] Fallback support for polling.
 
-To install
+#### To install
 ```bash
 npm install -save bucklescript-phx
 ```
 
-Please update your `bsconfig.json` to make `bsb` aware of this dependency
+#### Please update your `bsconfig.json` to make `bsb` aware of this dependency
 ```
 "bs-dependencies": [
     "bucklescript-phx"
   ]
 ```
+#### Notice:
 
-Please add this to you `assets/js/app.js`
-```javascript
-import {Socket, Channel, Presence} from "phoenix"
-global.Socket = Socket
-global.Channel = Channel
-global.Presence = Presence
-```
+1. Please add official Phoenix client as your dependency to make sure BuckleScript is able to require Phoenix's js.
+
+2. Meta of Presence and payload of incoming event are decalred as `Js_json.t` which means you need to decode it with your prefered decoder (in TEA it is very convenient with `Json.Decoder.decodeValue`).
+
+3. The bindings are based on [https://github.com/DefinitelyTyped/DefinitelyTyped](DefinitelyTyped). There might be some error on mapping the types. Please help correct them if you find anything wrong. Thank you!
+
+#### Here are the examples:
 
 To join a channel:
 ```ocaml
@@ -36,23 +38,25 @@ open Phoenix
 
 let handleReiceive event any =
   match event with
-  | "ok" -> Js.log "Joined"
-  | "error" -> Js.log "Failed to join channel"
-  | otherEvent -> let _ = Js.log otherEvent in Js.log any
+  | "ok" -> Js.log ("handleReiceive:" ^ event, "Joined")
+  | "error" -> Js.log ("handleReiceive:" ^ event, "Failed to join channel")
+  | _ -> Js.log ("handleReiceive:" ^ event, any)
 
 let handleEvent event response =
-  let _ = Js.log response in
+  let _ = Js.log ("handleEvent:" ^ event, response) in
   ()
 
+
 let handleSyncState response =
-  (*let _ = Js.log response in*)
+  let _ = Js.log ("handleSyncState", response) in
   (*let _ = Js.log (Array.iter (fun key -> Js.log (Js_dict.unsafeGet response key)) (Js_dict.keys response) ) in*)
-  let presences  =  Presence.syncState (Js.Dict.empty ()) response in
+  let _presences  =  Presence.syncState (Js.Dict.empty ()) response in
   ()
 
 let handleSyncDiff diff =
+  let _ = Js.log ("handleSyncDiff:diff", diff) in
   let presences  =  Presence.syncDiff (Js.Dict.empty ()) diff in
-  let _ = Js.log presences in
+  let _ = Js.log ("handleSyncDiff:presences", presences) in
   ()
 
 let _ =
@@ -68,5 +72,5 @@ let _ =
           |> joinChannel
           |> putReceive "ok" (handleReiceive "ok")
           |> putReceive "error" (handleReiceive "error") in
-  push "new:message" [%bs.obj { user = "It's a user"} ] channel
+  push "new:message" [%bs.obj { user = "Hello, Elixir! This is a greeting from BuckleScript!"} ] channel
 ```

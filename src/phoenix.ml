@@ -24,7 +24,7 @@ let leaveChannel ?timeout:(timeout: float option) channel =
   leaveChannel channel ?timeout ()
 
 
-external push : Channel.t -> string -> payloadObject -> ?timeout:float -> unit -> Push.t = "push" [@@bs.send]
+external push : Channel.t -> string -> 'payload Js.t -> ?timeout:float -> unit -> Push.t = "push" [@@bs.send]
 let push event object_ ?timeout:(timeout: float option) channel =
    push channel event object_ ?timeout ()
 

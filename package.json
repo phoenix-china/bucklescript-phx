@@ -2,10 +2,11 @@
   "name": "bucklescript-phx",
   "description": "BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client",
   "author": "JackalCooper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "build": "brunch build --production",
+    "build:bsb": "bsb -make-world"
   },
   "repository": {
     "type": "git",

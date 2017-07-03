@@ -30,3 +30,4 @@ public/
 
 # Bower stuff.
 bower_components/
+.merlin

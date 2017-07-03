@@ -8,10 +8,6 @@
         "commonjs"
     ],
     "sources": [
-        "src",
-        {
-            "dir": "test",
-            "type": "dev"
-        }
+        "src"
     ]
 }

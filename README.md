@@ -1,7 +1,7 @@
 # BuckleScript Phoenix
 [![NPM](https://nodei.co/npm/bucklescript-phx.png?compact=true)](https://nodei.co/npm/bucklescript-phx/)
 
-[![Build Status](https://travis-ci.org/OvermindDL1/bucklescript-phx.svg?branch=master)](https://travis-ci.org/OvermindDL1/bucklescript-phx)
+[![Build Status](https://travis-ci.org/phoenix-china/bucklescript-phx.svg?branch=master)](https://travis-ci.org/OvermindDL1/bucklescript-phx)
 #### BuckleScript binding for Phoenix Channel/Presence to Phoenix's official JavaScript client.
 #### This is usable now.
 #### Feel free to create PRs.

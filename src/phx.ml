@@ -4,7 +4,6 @@ module Socket = Phx_socket
 module Push = Phx_push
 module Presence = Phx_presence
 module LongPoll = Phx_long_poll
-module Tea = Phx_tea
 
 open Abstract
 (*Init functions*)

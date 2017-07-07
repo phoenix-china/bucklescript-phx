@@ -37,7 +37,7 @@ npm install -save bucklescript-phx
 
 To join a channel:
 ```ocaml
-open Phoenix
+open Phx
 
 let handleReiceive event any =
   match event with

@@ -66,6 +66,7 @@ external init : string -> ?opts:('opts Js.t) -> unit -> t =  "Socket" [@@bs.new]
 let init ?opts:(opts: ('opts Js.t) option) path =
   init path ?opts ()
 
+(* Chris McCord: "The Channel's consturctor is private. You should only create channel instances off the socket's channel/2 function." *)
 (*constructor(topic: string, params?: Object, socket?: Socket);*)
 external initChannel : string -> ?params:('params Js.t) -> ?socket:t-> unit -> Phx_channel.t =  "Channel" [@@bs.new] [@@bs.module "phoenix"]
 let initChannel ?params ?socket topic=

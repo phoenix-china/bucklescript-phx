@@ -76,6 +76,7 @@ let _ =
           |> putReceive "ok" (handleReiceive "ok")
           |> putReceive "error" (handleReiceive "error") in
   push "new:message" [%bs.obj { user = "Hello, Elixir! This is a greeting from BuckleScript!"} ] channel
+  ```
   
   #### Reasonml:
 

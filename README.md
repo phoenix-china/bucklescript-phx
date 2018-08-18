@@ -76,4 +76,51 @@ let _ =
           |> putReceive "ok" (handleReiceive "ok")
           |> putReceive "error" (handleReiceive "error") in
   push "new:message" [%bs.obj { user = "Hello, Elixir! This is a greeting from BuckleScript!"} ] channel
+  
+  #### Reasonml:
+
+To join a channel:
+```reasonml
+open Phx
+  
+  let handleReiceive = (event, any) =>
+  switch event {
+  | "ok" => Js.log(("handleReiceive:" ++ event, "Joined"))
+  | "error" => Js.log(("handleReiceive:" ++ event, "Failed to join channel"))
+  | _ => Js.log(("handleReiceive:" ++ event, any))
+  };
+
+let handleEvent = (event, response) => {
+  let _ = Js.log(("handleEvent:" ++ event, response));
+  ();
+};
+
+let handleSyncState = (response) => {
+  let _ = Js.log(("handleSyncState", response));
+  /*let _ = Js.log (Array.iter (fun key -> Js.log (Js_dict.unsafeGet response key)) (Js_dict.keys response) ) in*/
+  let _presences = Presence.syncState(Js.Dict.empty(), response);
+  ();
+};
+
+let handleSyncDiff = (diff) => {
+  let _ = Js.log(("handleSyncDiff:diff", diff));
+  let presences = Presence.syncDiff(Js.Dict.empty(), diff);
+  let _ = Js.log(("handleSyncDiff:presences", presences));
+  ();
+};
+
+{
+  let socket = initSocket("/socket") |> connectSocket |> putOnClose(() => Js.log("Socket closed"));
+  let channel = socket |> initChannel("user:lobby");
+  let _ =
+    channel
+    |> putOn("from_server", handleEvent("from:server"))
+    |> putOnSyncState(handleSyncState)
+    |> putOnsyncDiff(handleSyncDiff)
+    |> joinChannel
+    |> putReceive("ok", handleReiceive("ok"))
+    |> putReceive("error", handleReiceive("error"));
+  push("new:message", {"user": "Hello, Elixir! This is a greeting from BuckleScript!"}, channel);
+};
+  
 ```

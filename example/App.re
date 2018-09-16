@@ -44,7 +44,7 @@ module Decode = {
       )
       ),
       )
-      | FETCHEDWS(id) => ReasonReact.Update(LOADED(id))
+      | WEBSOCKET(id) => ReasonReact.Update(LOADED(id))
       | FAILEDTOFETCH => ReasonReact.Update(ERROR)
 
      };

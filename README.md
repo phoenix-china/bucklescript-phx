@@ -81,7 +81,7 @@ let _ =
   #### Reasonml:
 
 To join a channel:
-```reasonml
+```reason
 open Phx
   
   let handleReiceive = (event, any) =>

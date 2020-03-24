@@ -23,10 +23,11 @@
     "url": "https://github.com/phoenix-china/bucklescript-phx/issues"
   },
   "homepage": "https://github.com/phoenix-china/bucklescript-phx#readme",
-  "dependencies": {},
+  "dependencies": {
+    "phoenix": "*"
+  },
   "peerDependencies": {
-    "bs-platform": "^1.8.0",
-    "phoenix": "^1.2.1"
+    "bs-platform": "*"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2",
